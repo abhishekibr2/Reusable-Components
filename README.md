@@ -10,8 +10,7 @@ Welcome to the **Reusable UI Components** repository! This repository contains a
    - [Table Component](/Components/Table/Readme.md)
    - [Other Components (Coming Soon)](#other-components-coming-soon)
 3. [Installation](#installation)
-4. [Contributing](#contributing)
-5. [License](#license)
+4. [License](#license)
 
 ---
 
