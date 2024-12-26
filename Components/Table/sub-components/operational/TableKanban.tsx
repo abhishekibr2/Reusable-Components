@@ -24,7 +24,7 @@ import { BoardContainer } from "./kanban/BoardColumn";
 import { BoardColumn } from "./kanban/BoardColumn";
 import { Button } from "@/components/ui/button";
 import { Loader2, Table } from "lucide-react";
-import { GetKanbanData, UpdateKanbanData } from "@/utils/utils";
+import { GetKanbanData, UpdateKanbanData } from "../../utils/utils";
 
 
 interface Kanban {
