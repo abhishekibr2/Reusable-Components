@@ -32,7 +32,7 @@ import {
     SelectValue,
 } from "@/components/ui/select"
 import { TableDelete } from "./sub-components/operational/TableDelete"
-import { FetchPopulatedData, FetchTableData, UpdateRow } from "@/utils/utils"
+import { FetchPopulatedData, FetchTableData, UpdateRow } from "./utils/utils"
 import TableKanban from "./sub-components/operational/TableKanban"
 import { Button } from "@/components/ui/button"
 
@@ -101,6 +101,17 @@ const formatDateForInput = (date: string | Date) => {
     return d.toISOString().split('T')[0];
 };
 
+
+const formatFilterParams = (filters: FilterValue[]) => {
+    return filters.map(filter => ({
+        field: filter.column,
+        operator: filter.operator,
+        value: filter.value,
+        secondValue: filter.secondValue,
+        type: filter.type
+    }));
+};
+
 // Custom Hooks
 const useTableData = (config: TableProps['config'], endpoint: string, sorting: SortingState, searchTerm: string, pagination: PaginationState, filters: FilterValue[]) => {
     const [data, setData] = useState<any[]>([]);
@@ -108,6 +119,7 @@ const useTableData = (config: TableProps['config'], endpoint: string, sorting: S
     const [loading, setLoading] = useState(true);
     const [operationLoading, setOperationLoading] = useState(false);
     const [paginationState, setPaginationState] = useState(pagination);
+
     const loadTableData = useCallback(async () => {
         if (loading) {
             setLoading(true);
@@ -124,10 +136,7 @@ const useTableData = (config: TableProps['config'], endpoint: string, sorting: S
 
             // Format filter parameters
             const filterParams = JSON.stringify(
-                filters.reduce((acc, filter) => ({
-                    ...acc,
-                    [filter.column]: filter.value
-                }), {})
+                filters.length > 0 ? formatFilterParams(filters) : []
             );
 
             // Format sort parameters
